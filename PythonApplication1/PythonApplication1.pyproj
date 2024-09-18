@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>7ac40c5a-da26-4538-9b85-09ef12b7f102</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>finalwithnormalization.py</StartupFile>
+    <StartupFile>FinalwithNormalize.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="elbow.py" />
-    <Compile Include="finalwithnormalization.py" />
+    <Compile Include="FinalwithNormalize.py" />
+    <Compile Include="finalwithrealdatawithoutnormalize.py" />
     <Compile Include="PythonApplication1.py" />
     <Compile Include="TunnigKmeans.py" />
   </ItemGroup>

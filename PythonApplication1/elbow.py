@@ -27,7 +27,7 @@ class MyClass(object):
            'PWD=hasin'
        )
        
-       query = "SELECT totalcount, sumamount, SwitchTerminal FROM SEP_INTERNET_AGGREGATED_DAILY"
+       query = "SELECT totalcount, sumamount, SwitchTerminal FROM SEP_INTERNET_AGGREGATED_DAILY where DT < 20240915 order BY sumamount desc"
        
        # Retrieve the data into a pandas DataFrame
        df = pd.read_sql(query, conn)
@@ -36,6 +36,24 @@ class MyClass(object):
        conn.close()
        
        # Return the totalcount, totalamount, and SwitchNumber columns as a NumPy array
+       return df[['totalcount', 'sumamount', 'SwitchTerminal']].values
+
+   def get_sql_new_data(self):
+       # Define the connection string to your SQL Server
+       conn = pyodbc.connect(
+           'DRIVER={SQL Server};'
+           'SERVER=10.81.15.16;'
+           'DATABASE=FRAUD_DEV_PSP;'
+           'UID=hasin;'
+           'PWD=hasin'
+       )
+       
+       query = "SELECT TOP (100) totalcount, sumamount, SwitchTerminal  FROM  SEP_INTERNET_AGGREGATED_DAILY  WHERE (DT <= 20240916) ORDER BY DT DESC, TOTALCOUNT desc"
+
+       df = pd.read_sql(query, conn)
+       
+       conn.close()
+       
        return df[['totalcount', 'sumamount', 'SwitchTerminal']].values
 
    #Elbow Method 
