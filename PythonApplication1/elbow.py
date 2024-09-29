@@ -48,7 +48,7 @@ class MyClass(object):
            'PWD=hasin'
        )
        
-       query = "SELECT TOP (100) totalcount, sumamount, SwitchTerminal  FROM  SEP_INTERNET_AGGREGATED_DAILY  WHERE (DT <= 20240916) ORDER BY DT DESC, TOTALCOUNT desc"
+       query = "SELECT TOP (100) totalcount, sumamount, SwitchTerminal  FROM  SEP_INTERNET_AGGREGATED_DAILY  WHERE (DT <= 20240916) ORDER BY DT DESC, SUMAMOUNT desc"
 
        df = pd.read_sql(query, conn)
        

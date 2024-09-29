@@ -12,7 +12,11 @@ from sklearn.ensemble import IsolationForest
 iris_data = elb.MyClass()      # Create an instance of MyClass
 data = iris_data.get_sql_data() # Get the features and labels
 X = data[:, :2]
-print(f"Counts X-shape: {X.shape[0]}")
+max_values = np.max(X, axis=0)
+
+# This will return a 1D array where each element is the maximum of that dimension
+print("Maximum values in each dimension before apply filtering :", max_values)
+print(f"Counts X-shape before apply filtering : {X.shape[0]}")
 
 # Apply logarithmic transformation###################################################################################
 # X_log_transformed = np.log1p(X)  # Use log1p to avoid log(0) issues
@@ -59,6 +63,17 @@ outliers = iso_forest.fit_predict(X)
 
 # Filter data: Keep points labeled as '1' (non-outliers)
 X_scaled = X[outliers == 1]
+max_values = np.max(X_scaled, axis=0)
+# This will return a 1D array where each element is the maximum of that dimension
+print("Maximum values in each dimension after apply filtering :", max_values)
+
+plt.scatter(X_scaled[:, 0], X_scaled[:, 1])
+plt.gca().yaxis.set_major_formatter(plt.FuncFormatter('{:.0f}'.format))
+plt.grid(True)
+plt.xlabel("Total Count")
+plt.ylabel("Total Amount")
+plt.show()
+
 
 scaler = MinMaxScaler(feature_range=(0, 10000))
 
@@ -73,7 +88,7 @@ plt.xlabel("Total Count")
 plt.ylabel("Total Amount")
 plt.show()
 
-print(f"Counts X-shape: {X_scaled.shape[0]}")
+print(f"Counts X-shape after apply filterin and normalization with MinMaxScaller: {X_scaled.shape[0]}")
 
 # Distance function (e.g., Euclidean distance)
 def distance(x1, x2):
@@ -281,6 +296,9 @@ X_NEWDATA = new_data_point[:, :2] # Example new data point (scaled)
 
 X_normalized = scaler.transform(X_NEWDATA)
 
+max_values = np.max(X_NEWDATA, axis=0)
+# This will return a 1D array where each element is the maximum of that dimension
+print("Maximum values for new data Incomming :", max_values)
 # # Normalize the first dimension (horizontal) to [1, 100000]
 # X_normalized[:, 0] = (X_NEWDATA[:, 0] - X_NEWDATA[:, 0].min()) / (X_NEWDATA[:, 0].max() - X_NEWDATA[:, 0].min()) * 100000 + 1
 
